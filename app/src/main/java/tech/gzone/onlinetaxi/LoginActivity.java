@@ -25,10 +25,14 @@ public class LoginActivity extends AppCompatActivity {
             m1.login=true;
         }
         else{
-
+            error.setText("Incorrect Username or Password");
         }
 
     }
 
-    boolean validateUNPW(String username,String password)
+    boolean validateUNPW(String username,String password){
+
+
+        return true;
+    }
 }
