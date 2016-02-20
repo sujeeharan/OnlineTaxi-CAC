@@ -29,16 +29,14 @@ public class Database {
     public Database(){}
 
 
-    public void insert(String uplatitude,String uplongitude,String uplocationid) {
+    public void insert(String uplatitude,String uplongitude,String userid) {
 
         ArrayList<NameValuePair> nameValuePairs =new ArrayList<NameValuePair>();
 
         //-------------this is the place update to database
         nameValuePairs.add(new BasicNameValuePair("latitude",uplatitude));
         nameValuePairs.add(new BasicNameValuePair("longitude",uplongitude));
-        nameValuePairs.add(new BasicNameValuePair("locationid",uplocationid));
-
-
+        nameValuePairs.add(new BasicNameValuePair("userid",userid));
 
         try{
 
@@ -108,5 +106,76 @@ public class Database {
 
             Log.e("Fail 3", e.toString());
         }
+
+
     }
+
+    boolean validateUNPW(String username, String password) {
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+        //-------------this is the place update to database
+        nameValuePairs.add(new BasicNameValuePair("username", username));
+        nameValuePairs.add(new BasicNameValuePair("password", password));
+
+
+        try {
+
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost("http://adminpanel.gzone.tech/logincheck.php");
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            is = entity.getContent();
+            Log.e("pass 1", "connection success ");
+
+            //   /home/sujeeharan/public_html/www/newlocation.php
+        } catch (Exception e) {
+
+
+            Log.e("Fail 1", e.toString());
+            // Toast.makeText(getApplicationContext(), "Invalid ip Address", Toast.LENGTH_SHORT).show();
+
+
+        }
+        try {
+            BufferedReader reader = new BufferedReader
+                    (new InputStreamReader(is, "iso-8859-1"), 8);
+            StringBuilder sb = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+
+
+            }
+
+            is.close();
+            result = sb.toString();
+            Log.e("pass 2", "connection success ");
+        } catch (Exception e) {
+
+            Log.e("Fail 2", e.toString());
+        }
+
+        try {
+
+            JSONObject jsnobject = new JSONObject(result);
+
+            code = (jsnobject.getInt("code"));
+
+
+            if (code == 1) {
+                ///Toast.makeText(getBaseContext(), "Inserted Successfully",
+                //   Toast.LENGTH_SHORT).show();
+            } else {
+                // Toast.makeText(getBaseContext(), "Sorry, Try Again",
+                //   Toast.LENGTH_LONG).show();
+            }
+
+        } catch (Exception e) {
+
+            Log.e("Fail 3", e.toString());
+        }
+        return false;
+    }
+
 }
