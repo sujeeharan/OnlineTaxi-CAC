@@ -1,5 +1,8 @@
 package tech.gzone.onlinetaxi;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -19,14 +22,19 @@ import java.util.ArrayList;
 /**
  * Created by Sujeeharan on 03-Feb-16.
  */
-public class Database {
+public class Database extends SQLiteOpenHelper {
 
     InputStream is=null;
     String line=null;
     String result="";
     int code=0;
 
-    public Database(){}
+    //DATABASE SQLLite
+    public static final String DATABASE_NAME= "ceylonaddscompany.db";
+    public static final String TABLE_NAME="banner";
+    public static final String COL_1= "bannerid";
+    public static final String COL_2= "latitude";
+    public static final String COL_3= "longitude";
 
 
     public void insert(String uplatitude,String uplongitude,String userid) {
@@ -178,4 +186,18 @@ public class Database {
         return false;
     }
 
+
+    public Database(Context context) {
+        super(context, DATABASE_NAME, null,1);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("Create Table " +TABLE_NAME+ "(bannerid integer PRIMARY KEY, latitude double, longitude,double,)");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
 }

@@ -7,18 +7,18 @@ import android.os.AsyncTask;
  */
 public class Application extends AsyncTask {
 
-        String uplatitude,uplongitude,uplocationid ;
-        Application(String puplatitude,String puplongitude,String puplocationid){
+        String uplatitude,uplongitude,upvehicleno ;
+        Application(String puplatitude,String puplongitude,String pupvehicleno){
             uplatitude=puplatitude;
             uplongitude=puplongitude;
-            uplocationid=puplocationid;
+            upvehicleno=pupvehicleno;
         }
 
         Database c=new Database();
 
         @Override
         protected Object doInBackground(Object[] params) {
-            c.insert(uplatitude,uplongitude,uplocationid);
+            c.insert(uplatitude,uplongitude,upvehicleno);
             return null;
         }
 
