@@ -13,12 +13,9 @@ public class Application extends AsyncTask {
             uplongitude=puplongitude;
             upvehicleno=pupvehicleno;
         }
-
-        Database c=new Database();
-
         @Override
         protected Object doInBackground(Object[] params) {
-            c.insert(uplatitude,uplongitude,upvehicleno);
+
             return null;
         }
 

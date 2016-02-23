@@ -1,5 +1,7 @@
 package tech.gzone.onlinetaxi;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
@@ -17,31 +19,21 @@ import org.apache.http.message.BasicNameValuePair;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AsyncTask<String,Void,String> {
 
     String username;
     String password;
     InputStream is;
-    Database d= new Database();
+    private Context context;
+    private int byGetOrPost = 0;
+
+    public LoginActivity (Context context,TextView statusField,TextView roleField,int flag) {
+        this.context = context;
+        byGetOrPost = flag;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        EditText temp1= (EditText) findViewById(R.id.userid);
-        EditText temp2 = (EditText) findViewById(R.id.password);
-        TextView error= (TextView) findViewById(R.id.error);
-
-        password = temp2.getText().toString();
-        username = temp1.getText().toString();
-        MainActivity m1 = new MainActivity();
-        if(d.validateUNPW(username, password)){
-            m1.login=true;
-
-        }
-        else{
-            error.setText("Incorrect Username or Password");
-        }
-
+    protected String doInBackground(String... params) {
+        return null;
     }
 }
