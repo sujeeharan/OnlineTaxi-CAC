@@ -35,7 +35,7 @@ public class DownloadFile extends Activity {
     int totalSize = 0;
     TextView cur_val;
 
-    void downloadFile(String URL) {
+    void downloadFile() {
 
         try {
             URL url = new URL(URL);
