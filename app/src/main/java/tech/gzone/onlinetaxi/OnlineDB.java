@@ -4,7 +4,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -15,29 +19,54 @@ import java.net.URL;
 /**
  * Created by Sujeeharan on 23-Feb-16.
  */
-public class OnlineDB extends AsyncTask<String,Void,Void> {
+public class OnlineDB extends AsyncTask {
 
     private int flag;
     private Context context;
     private Video video;
     private BannerAd bannerAd;
+    private Double latitude,longitude;
+    private String result;
+    private String bannerid;
+    private String videoid;
 
-    public OnlineDB (int flag){
+    public OnlineDB (int flag,String videoid){
         this.flag=flag;
-
+        this.videoid=videoid;
     }
 
+    public OnlineDB(int flag,double latitude, double longitude){
+        this.longitude=longitude;
+        this.latitude=latitude;
+        this.flag=flag;
+    }
+/*
     @Override
     protected Void doInBackground(String... params) {
         //addcount to Video
+        //Toast.makeText(context,"FLAG Entered Loop",Toast.LENGTH_SHORT);
+
         flag=Integer.parseInt(params[1]);
+        //Add count to Banner
+        if(flag == 2){
+            String bannerid=params[0];
+
+            Toast.makeText(context,"FLAG 2 Count Banner",Toast.LENGTH_SHORT);
+        }
+        else if(flag==3){
+
+
+        }
+        return null;
+    }
+*/
+    @Override
+    protected Object doInBackground(Object[] params) {
+
         if(flag==1) {
-            String videoid=params[0];
-            Toast.makeText(context,"FLAG 1 Count Video",Toast.LENGTH_SHORT);
+            //  Toast.makeText(context,"FLAG 1 Count Video",Toast.LENGTH_SHORT);
             try {
-
                 String link = "http://adminpanel.gzone.tech/mobileapp/videocount.php?videoid=" + videoid;
-
                 URL url = new URL(link);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestProperty("User-Agent", "");
@@ -45,8 +74,8 @@ public class OnlineDB extends AsyncTask<String,Void,Void> {
                 connection.setDoInput(true);
                 connection.connect();
                 InputStream inputStream = connection.getInputStream();
-                BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
 
+                BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuffer sb = new StringBuffer("");
                 String line = "";
 
@@ -57,26 +86,19 @@ public class OnlineDB extends AsyncTask<String,Void,Void> {
                 rd.close();
             }
             catch (Exception e) {
+                /*
                 AlertDialog.Builder a_builder = new AlertDialog.Builder(context);
-                a_builder.setMessage("Adding Count FAILED").
+                a_builder.setMessage("").
                         setCancelable(false).
                         setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //finish();
                             }
-                        });
+                        });*/
             }
         }
-        //Add count to Banner
-        else if(flag == 2){
-            String bannerid=params[0];
 
-            Toast.makeText(context,"FLAG 2 Count Banner",Toast.LENGTH_SHORT);
-        }
-        else if(flag==3){
-
-        }
         return null;
     }
 }

@@ -34,11 +34,10 @@ public class DownloadFile extends Activity {
     int downloadedSize = 0;
     int totalSize = 0;
     TextView cur_val;
-
-    void downloadFile() {
-
+    String URL = "http://gzone.tech/public_html/adminpanel/videos/";
+    void downloadFile(String filename) {
         try {
-            URL url = new URL(URL);
+            URL url = new URL(URL+filename+".mp4");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             urlConnection.setRequestMethod("GET");
@@ -50,7 +49,7 @@ public class DownloadFile extends Activity {
             //set the path where we want to save the file
             File SDCardRoot = Environment.getExternalStorageDirectory();
             //create a new file, to save the <span id="IL_AD8" class="IL_AD">downloaded</span> file
-            File file = new File(SDCardRoot, "downloaded_file.png");
+            File file = new File(SDCardRoot,filename+".mp4");
 
             FileOutputStream fileOutput = new FileOutputStream(file);
 
@@ -91,39 +90,12 @@ public class DownloadFile extends Activity {
             });
 
         } catch (final MalformedURLException e) {
-            showError("Error : MalformedURLException " + e);
             e.printStackTrace();
         } catch (final IOException e) {
-            showError("Error : IOException " + e);
             e.printStackTrace();
         } catch (final Exception e) {
-            showError("Error : Please check your internet connection " + e);
+
         }
-    }
-
-    void showError(final String err) {
-        runOnUiThread(new Runnable() {
-            public void run() {
-                Toast.makeText(DownloadFile.this, err, Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    void showProgress(String file_path) {
-        dialog = new Dialog(DownloadFile.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.myprogressdialog);
-        dialog.setTitle("Download Progress");
-
-        TextView text = (TextView) dialog.findViewById(R.id.tv1);
-        text.setText("Downloading file from ... " + file_path);
-        cur_val = (TextView) dialog.findViewById(R.id.cur_pg_tv);
-        cur_val.setText("Starting download...");
-        dialog.show();
-
-        pb = (ProgressBar) dialog.findViewById(R.id.progress_bar);
-        pb.setProgress(0);
-        pb.setProgressDrawable(getResources().getDrawable(R.drawable.green_progress));
     }
 }
 
