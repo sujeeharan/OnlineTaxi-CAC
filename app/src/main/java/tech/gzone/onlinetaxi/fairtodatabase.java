@@ -49,7 +49,6 @@ public class fairtodatabase {
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
-
             */
 
             String link = "http://adminpanel.gzone.tech/mobileapp/fair_cal.php";
