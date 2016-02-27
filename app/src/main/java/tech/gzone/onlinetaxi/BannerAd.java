@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,6 +14,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Sujeeharan on 26-Jan-16
@@ -21,7 +24,7 @@ public class BannerAd extends AsyncTask{
     private int count;
     private String result;
     private String latitude,longitude;
-    public String bannerid;
+    public ArrayList<String> bannerid;
     public void addCount( String bannerId){
      //   new OnlineDB(2).execute(bannerId);
     }
@@ -98,8 +101,10 @@ public class BannerAd extends AsyncTask{
         }
         try{
             JSONObject banner = new JSONObject(result);
-            this.bannerid= banner.getString("bannerid");
-            Log.e("Fail",bannerid);
+            for (int i=0; i<banner.length(); i++) {
+                bannerid.add(banner.getString("bannerid")); //add to arraylist
+            }
+            Log.e("Pass","asd");
         }
         catch (JSONException e)
         {

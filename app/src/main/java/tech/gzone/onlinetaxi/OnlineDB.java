@@ -40,26 +40,6 @@ public class OnlineDB extends AsyncTask {
         this.latitude=latitude;
         this.flag=flag;
     }
-/*
-    @Override
-    protected Void doInBackground(String... params) {
-        //addcount to Video
-        //Toast.makeText(context,"FLAG Entered Loop",Toast.LENGTH_SHORT);
-
-        flag=Integer.parseInt(params[1]);
-        //Add count to Banner
-        if(flag == 2){
-            String bannerid=params[0];
-
-            Toast.makeText(context,"FLAG 2 Count Banner",Toast.LENGTH_SHORT);
-        }
-        else if(flag==3){
-
-
-        }
-        return null;
-    }
-*/
     @Override
     protected Object doInBackground(Object[] params) {
 
@@ -78,7 +58,6 @@ public class OnlineDB extends AsyncTask {
                 BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuffer sb = new StringBuffer("");
                 String line = "";
-
                 while ((line = rd.readLine()) != null) {
                     sb.append(line);
                     break;
