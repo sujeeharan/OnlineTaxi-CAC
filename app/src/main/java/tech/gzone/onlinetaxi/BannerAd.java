@@ -112,4 +112,31 @@ public class BannerAd extends AsyncTask{
         }
         return null;
     }
+
+    public void addcount(String pbannerid){
+        try {
+            String link = "http://adminpanel.gzone.tech/mobileapp/addcount.php?trackid="+pbannerid;
+            URL url = new URL(link);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("User-Agent", "");
+            connection.setRequestMethod("GET");
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream inputStream = connection.getInputStream();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
+
+            StringBuffer sb = new StringBuffer("");
+            String line = "";
+
+            while ((line = rd.readLine()) != null) {
+                sb.append(line);
+                break;
+            }
+            rd.close();
+            result = sb.toString();
+        }
+        catch (Exception e) {
+            Log.e("Failed Reading Data",e.toString());
+        }
+    }
 }

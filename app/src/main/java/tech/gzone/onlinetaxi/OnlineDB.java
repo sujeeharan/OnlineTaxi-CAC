@@ -30,8 +30,7 @@ public class OnlineDB extends AsyncTask {
     private String bannerid;
     private String videoid;
 
-    public OnlineDB (int flag,String videoid){
-        this.flag=flag;
+    public OnlineDB (String videoid){
         this.videoid=videoid;
     }
 
@@ -43,6 +42,7 @@ public class OnlineDB extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] params) {
 
+        videoid= params[0].toString();
         if(flag==1) {
             //  Toast.makeText(context,"FLAG 1 Count Video",Toast.LENGTH_SHORT);
             try {

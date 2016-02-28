@@ -28,7 +28,6 @@ public class gpstodatabase {
 
     public gpstodatabase(){}
 
-
     public void insert(String uplatitude,String uplongitude,String upvehicleid) {
 
         ArrayList<NameValuePair> nameValuePairs =new ArrayList<NameValuePair>();

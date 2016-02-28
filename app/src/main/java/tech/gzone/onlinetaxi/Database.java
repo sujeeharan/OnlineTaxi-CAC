@@ -83,13 +83,8 @@ public class Database extends SQLiteOpenHelper {
 
         try
         {
-
             JSONObject jsnobject = new JSONObject(result);
-
             code=(jsnobject.getInt("code"));
-
-
-
             if(code==1)
             {
                 ///Toast.makeText(getBaseContext(), "Inserted Successfully",
