@@ -3,6 +3,8 @@ package tech.gzone.onlinetaxi;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -29,6 +31,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -306,7 +313,29 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+            try {
+                String link = "http://adminpanel.gzone.tech/mobileapp/location.php?username=" + mEmail + "&password=" + mPassword;
+                URL url = new URL(link);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestProperty("User-Agent", "");
+                connection.setRequestMethod("GET");
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream inputStream = connection.getInputStream();
+                BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
+
+                StringBuffer sb = new StringBuffer("");
+                String line = "";
+
+                while ((line = rd.readLine()) != null) {
+                    sb.append(line);
+                    break;
+                }
+                rd.close();
+            }
+            catch (Exception e) {
+
+            }
 
             try {
                 // Simulate network access.
