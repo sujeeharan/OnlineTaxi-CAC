@@ -33,46 +33,8 @@ public class BannerAd extends AsyncTask{
         this.latitude=latitude;
         this.longitude=longitude;
     }
-/*
-    protected Void doInBackground(String[] params) {
-        String latitude = params[0];
-        String longitude = params[1];
-        try {
-            String link = "http://adminpanel.gzone.tech/mobileapp/findbanner.php?latitude=" + latitude+"?longitude="+longitude;
-            URL url = new URL(link);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("User-Agent", "");
-            connection.setRequestMethod("GET");
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream inputStream = connection.getInputStream();
-            BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
 
-            StringBuffer sb = new StringBuffer("");
-            String line = "";
 
-            while ((line = rd.readLine()) != null) {
-                sb.append(line);
-                break;
-            }
-            rd.close();
-            result = sb.toString();
-        }
-        catch (Exception e) {
-            Log.e("Failed Reading Data",e.toString());
-        }
-        try{
-            JSONObject banner = new JSONObject(result);
-            this.bannerid= banner.getString("bannerid");
-            Log.e("Fail",bannerid);
-        }
-        catch (JSONException e)
-        {
-            Log.e("Fail", e.toString());
-        }
-
-    }
-*/
     @Override
     protected Object doInBackground(Object[] params) {
         try {

@@ -39,17 +39,15 @@ public class gpstodatabase {
 
         try{
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://adminpanel.gzone.tech/Mobileapp/newlocation.php");
+            HttpPost httppost = new HttpPost("http://adminpanel.gzone.tech/mobileapp/newlocation.php");
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
             is = entity.getContent();
-            Log.e("pass 1", "connection success ");
-
-            //   /home/sujeeharan/public_html/www/newlocation.php
+            Log.e("Pass", "Connection Established ");
         }
         catch (Exception e){
-            Log.e("Fail 1", e.toString());
+            Log.e("Failed Connecting", e.toString());
             // Toast.makeText(getApplicationContext(), "Invalid ip Address", Toast.LENGTH_SHORT).show();
         }
         try
@@ -64,11 +62,11 @@ public class gpstodatabase {
             }
             is.close();
             result=sb.toString();
-            Log.e("pass 2", result);
+            Log.e("Passed Got Results", result);
         }
         catch (Exception e){
 
-            Log.e("Fail 2", e.toString());
+            Log.e("Error Reading Results", e.toString());
         }
         try
         {
@@ -77,13 +75,10 @@ public class gpstodatabase {
             if(code==1)
             {
                 Log.e("Pass 3", "succesfull");
-                ///Toast.makeText(getBaseContext(), "Inserted Successfully",
-                //   Toast.LENGTH_SHORT).show();
             }
             else
             {
-                // Toast.makeText(getBaseContext(), "Sorry, Try Again",
-                //   Toast.LENGTH_LONG).show();
+                Log.e("Location Passed", "JSON Received");
             }
 
         }
