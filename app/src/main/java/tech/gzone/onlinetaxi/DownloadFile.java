@@ -35,8 +35,8 @@ public class DownloadFile extends Activity{
     int downloadedSize = 0;
     int totalSize = 0;
     TextView cur_val;
-    String VIDEO_URL = "http://gzone.tech/public_ftp/Video/";
-    String BANNER_URL = "http://gzone.tech/public_ftp/Banner/";
+    String VIDEO_URL = "http://adminpanel.gzone.tech/Video/";
+    String BANNER_URL = "http://adminpanel.gzone.tech/Banner/";
     ArrayList<String> videolist = new ArrayList();
 
     public ArrayList<String> GetVideo(){
